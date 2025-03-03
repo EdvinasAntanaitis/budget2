@@ -46,7 +46,7 @@ public class App {
         scanner.nextLine();
         System.out.println("Extra info: ");
         String info = scanner.nextLine();
-        IncomeRecord incomeRecord = new IncomeRecord(amount, category, LocalDateTime.now(), isBankTransfer, info);
+        IncomeRecord incomeRecord = new IncomeRecord(Record.getCounter(), amount, LocalDateTime.now(), info, category, isBankTransfer);
         balance.addIncomeRecord(incomeRecord);
         System.out.println("Added income.");
     }
@@ -63,7 +63,7 @@ public class App {
         String bankCard = scanner.nextLine();
         System.out.print("Extra info: ");
         String info = scanner.nextLine();
-        ExpenseRecord expenseRecord = new ExpenseRecord(amount, category, LocalDateTime.now(), paymentMethod, bankCard);
+        ExpenseRecord expenseRecord = new ExpenseRecord(Record.getCounter(), amount, LocalDateTime.now(), info, category, paymentMethod, bankCard);
         balance.addExpenseRecord(expenseRecord);
         System.out.println("Added expense.");
     }

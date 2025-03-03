@@ -28,10 +28,10 @@ public class Balance {
     }
 
     public boolean removeIncomeRecord(int id) {
-        return incomeRecords.removeIf(record -> record.getId() == id);
+        return incomeRecords.removeIf(record -> record.getId() == Record.getCounter());
     }
 
     public boolean removeExpenseRecord(int id) {
-        return expenseRecords.removeIf(record -> record.getId() == id);
+        return expenseRecords.removeIf(record -> record.getId() == Record.getCounter());
     }
 }

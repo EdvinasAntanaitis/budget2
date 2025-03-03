@@ -1,38 +1,20 @@
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class ExpenseRecord {
-    private static int counter = 0;
-    private final int id;
-    private final BigDecimal amount;
+public class ExpenseRecord extends Record {
     private final String category;
-    private final LocalDateTime date;
     private final String paymentMethod;
     private final String bankCard;
 
-    public ExpenseRecord(BigDecimal amount, String category, LocalDateTime date, String paymentMethod, String bankCard) {
-        this.id = ++counter;
-        this.amount = amount;
+    public ExpenseRecord(int id, BigDecimal amount, LocalDateTime date, String info, String category, String paymentMethod, String bankCard) {
+        super(id, amount, date, info);
         this.category = category;
-        this.date = date;
         this.paymentMethod = paymentMethod;
         this.bankCard = bankCard;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
     public String getCategory() {
         return category;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
     }
 
     public String getPaymentMethod() {
@@ -45,7 +27,6 @@ public class ExpenseRecord {
 
     @Override
     public String toString() {
-        return String.format("ID: %d, Amount: %.2f EUR, Category: %s, Date: %s, Payment Method: %s, Bank Card: %s",
-                id, amount.doubleValue(), category, date, paymentMethod, bankCard);
+        return super.toString() + ", category='" + category + "', paymentMethod='" + paymentMethod + "', bankCard='" + bankCard + "'";
     }
 }
