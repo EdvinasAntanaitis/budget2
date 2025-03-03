@@ -6,6 +6,9 @@ public class BudgetService {
     private final List<IncomeRecord> incomeRecords = new ArrayList<>();
     private final List<ExpenseRecord> expenseRecords = new ArrayList<>();
 
+
+
+
     public List<IncomeRecord> getIncomeRecords() {
         return incomeRecords;
     }
