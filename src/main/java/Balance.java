@@ -1,37 +1,52 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Balance {
-    private final List<IncomeRecord> incomeRecords = new ArrayList<>();
-    private final List<ExpenseRecord> expenseRecords = new ArrayList<>();
+    private final List<Record> records = new ArrayList<>();
 
-    public void addIncomeRecord(IncomeRecord incomeRecord) {
-        incomeRecords.add(incomeRecord);
+    public void addRecord(Record record) {
+        records.add(record);
     }
 
-    public void addExpenseRecord(ExpenseRecord expenseRecord) {
-        expenseRecords.add(expenseRecord);
+    public boolean removeRecordById(int id) {
+        return records.removeIf(record -> record.getId() == id);
     }
 
     public List<IncomeRecord> getIncomeRecords() {
-        return incomeRecords;
+        return records.stream()
+                .filter(r -> r instanceof IncomeRecord)
+                .map(r -> (IncomeRecord) r)
+                .collect(Collectors.toList());
     }
 
     public List<ExpenseRecord> getExpenseRecords() {
-        return expenseRecords;
+        return records.stream()
+                .filter(r -> r instanceof ExpenseRecord)
+                .map(r -> (ExpenseRecord) r)
+                .collect(Collectors.toList());
     }
 
     public double balance() {
-        double totalIncome = incomeRecords.stream().mapToDouble(i -> i.getAmount().doubleValue()).sum();
-        double totalExpenses = expenseRecords.stream().mapToDouble(e -> e.getAmount().doubleValue()).sum();
+        double totalIncome = getIncomeRecords().stream()
+                .mapToDouble(i -> i.getAmount().doubleValue())
+                .sum();
+
+        double totalExpenses = getExpenseRecords().stream()
+                .mapToDouble(e -> e.getAmount().doubleValue())
+                .sum();
+
         return totalIncome - totalExpenses;
     }
 
-    public boolean removeIncomeRecord(int id) {
-        return incomeRecords.removeIf(record -> record.getId() == Record.getCounter());
+    public Record getRecordById(int id) {
+        return records.stream()
+                .filter(r -> r.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
-    public boolean removeExpenseRecord(int id) {
-        return expenseRecords.removeIf(record -> record.getId() == Record.getCounter());
+    public List<Record> getAllRecords() {
+        return new ArrayList<>(records);
     }
 }

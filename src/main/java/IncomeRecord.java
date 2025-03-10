@@ -1,13 +1,12 @@
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class IncomeRecord extends Record{
+public class IncomeRecord extends Record {
+    private String category;
+    private boolean isBankTransfer;
 
-    private final String category;
-    private final boolean isBankTransfer;
-
-    public IncomeRecord(int id, BigDecimal amount, LocalDateTime date, String info, String category, boolean isBankTransfer) {
-        super(id, amount, date, info);
+    public IncomeRecord(BigDecimal amount, LocalDateTime date, String info, String category, boolean isBankTransfer) {
+        super(amount, date, info);
         this.category = category;
         this.isBankTransfer = isBankTransfer;
     }
@@ -16,12 +15,25 @@ public class IncomeRecord extends Record{
         return category;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public boolean isBankTransfer() {
         return isBankTransfer;
     }
 
+    public void setBankTransfer(boolean isBankTransfer) {
+        this.isBankTransfer = isBankTransfer;
+    }
+
+    @Override
+    public String toCSV() {
+        return "";
+    }
+
     @Override
     public String toString() {
-        return super.toString() + ", category='" + category + "', isBankTransfer=" + isBankTransfer;
+        return super.toString() + String.format(" | Category: %s | Bank Transfer: %s", category, isBankTransfer);
     }
 }
