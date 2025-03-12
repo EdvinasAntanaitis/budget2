@@ -6,7 +6,6 @@ public class RecordEditor {
     public static void editRecord(Scanner scanner, Record record) {
         System.out.println("\nEditing Record: ID = " + record.getId());
 
-        // --- Edit Amount ---
         System.out.printf("Amount: %.2f\n", record.getAmount());
         if (confirmEdit(scanner)) {
             System.out.print("Enter new amount: ");
@@ -15,7 +14,6 @@ public class RecordEditor {
             record.setAmount(newAmount);
         }
 
-        // --- Edit Info / Comment ---
         System.out.println("Info: " + record.getInfo());
         if (confirmEdit(scanner)) {
             System.out.print("Enter new info: ");
@@ -23,7 +21,6 @@ public class RecordEditor {
             record.setInfo(newInfo);
         }
 
-        // --- Edit Income or Expense-specific fields ---
         if (record instanceof IncomeRecord income) {
             System.out.println("Category: " + income.getCategory());
             if (confirmEdit(scanner)) {

@@ -20,7 +20,7 @@ public class Budget {
     }
 
     public List<Record> getAllRecords() {
-        return new ArrayList<>(records);  // Return a copy of the list to avoid modifying the original
+        return new ArrayList<>(records);
     }
 
     public double calculateBalance() {

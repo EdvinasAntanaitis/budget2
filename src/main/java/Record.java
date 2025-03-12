@@ -43,7 +43,6 @@ public abstract class Record {
         this.info = info;
     }
 
-    // 🟢 Abstract method that must be overridden in subclasses
     public abstract String toCSV();
 
     public static Record fromCSV(String csvLine) {
@@ -55,11 +54,11 @@ public abstract class Record {
         String info = parts[3];
         LocalDateTime date = LocalDateTime.parse(parts[4], FORMATTER);
 
-        if (parts[0].equals("I")) {  // IncomeRecord
+        if (parts[0].equals("I")) {
             String category = parts[5];
             boolean isBankTransfer = Boolean.parseBoolean(parts[6]);
             return new IncomeRecord(amount, date, info, category, isBankTransfer);
-        } else if (parts[0].equals("E")) {  // ExpenseRecord
+        } else if (parts[0].equals("E")) {
             String category = parts[5];
             String paymentMethod = parts[6];
             String bankCard = parts[7];
